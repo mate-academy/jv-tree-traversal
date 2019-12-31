@@ -10,4 +10,5 @@ Depth First Traversals:
 - Preorder (Root, Left, Right) : 1 2 4 5 3
 - Postorder (Left, Right, Root) : 4 5 2 3 1
 
-Task: Please implement the Inorder Tree Traversal case
+Task: Please implement all Tree Traversal cases. Add your implementation in BinaryTree class. To verify the solution run main method and see the results
+
