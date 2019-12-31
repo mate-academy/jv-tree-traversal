@@ -10,5 +10,7 @@ Depth First Traversals:
 - Preorder (Root, Left, Right) : 1 2 4 5 3
 - Postorder (Left, Right, Root) : 4 5 2 3 1
 
+Breadth First Traversal : 1 2 3 4 5
+
 Task: Please implement all Tree Traversal cases. Add your implementation in BinaryTree class. To verify the solution run main method and see the results
 

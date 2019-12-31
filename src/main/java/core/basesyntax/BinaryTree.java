@@ -38,4 +38,10 @@ public class BinaryTree {
         System.out.println("Please provide your implementation");
         return new ArrayList<>();
     }
+
+    /* Given a binary tree, print its nodes in pre order*/
+    public List<Node> getNodesBreadthFirst(Node node) {
+        System.out.println("Please provide your implementation");
+        return new ArrayList<>();
+    }
 }

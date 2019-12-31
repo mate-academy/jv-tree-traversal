@@ -68,4 +68,20 @@ public class BinaryTreeTest {
                 .collect(Collectors.toList());
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void getBreadthFirst() {
+        List<Integer> expected = new LinkedList<>();
+        expected.add(1);
+        expected.add(2);
+        expected.add(3);
+        expected.add(4);
+        expected.add(5);
+
+        List<Integer> actual = binaryTree.getNodesInorder(binaryTree.getRoot())
+                .stream()
+                .map(Node::getKey)
+                .collect(Collectors.toList());
+        Assert.assertEquals(expected, actual);
+    }
 }
