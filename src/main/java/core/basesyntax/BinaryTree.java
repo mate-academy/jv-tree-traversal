@@ -1,6 +1,9 @@
 package core.basesyntax;
 
-class BinaryTree {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BinaryTree {
     // Root of Binary Tree
     private Node root;
 
@@ -17,18 +20,22 @@ class BinaryTree {
     }
 
     /* Given a binary tree, print its nodes according to the 
-      "bottom-up" postorder traversal. */
-    public void printPostOrder(Node node) {
+      "bottom-up" post order traversal. */
+    public List<Node> getNodesPostOrder(Node node) {
         System.out.println("Please provide your implementation");
+
+        return new ArrayList<>();
     }
 
     /* Given a binary tree, print its nodes in inorder*/
-    void printInorder(Node node) {
+    public List<Node> getNodesInorder(Node node) {
         System.out.println("Please provide your implementation");
+        return new ArrayList<>();
     }
 
-    /* Given a binary tree, print its nodes in preorder*/
-    void printPreOrder(Node node) {
+    /* Given a binary tree, print its nodes in pre order*/
+    public List<Node> getNodesPreOrder(Node node) {
         System.out.println("Please provide your implementation");
+        return new ArrayList<>();
     }
 }
