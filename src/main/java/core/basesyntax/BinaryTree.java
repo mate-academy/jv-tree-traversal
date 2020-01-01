@@ -8,11 +8,11 @@ import java.util.Queue;
 public class BinaryTree {
     // Root of Binary Tree
     private Node root;
-    private List<Node> list;
+    private List<Node> nodes;
 
     public BinaryTree() {
         root = null;
-        list = new ArrayList<>();
+        nodes = new ArrayList<>();
     }
 
     public Node getRoot() {
@@ -29,29 +29,29 @@ public class BinaryTree {
         if (node != null) {
             getNodesPostOrder(node.getLeft());
             getNodesPostOrder(node.getRight());
-            list.add(node);
+            nodes.add(node);
         }
-        return list;
+        return nodes;
     }
 
     /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
         if (node != null) {
             getNodesInorder(node.getLeft());
-            list.add(node);
+            nodes.add(node);
             getNodesInorder(node.getRight());
         }
-        return list;
+        return nodes;
     }
 
     /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
         if (node != null) {
-            list.add(node);
+            nodes.add(node);
             getNodesPreOrder(node.getLeft());
             getNodesPreOrder(node.getRight());
         }
-        return list;
+        return nodes;
     }
 
     /* Given a binary tree, print its nodes in pre order*/
