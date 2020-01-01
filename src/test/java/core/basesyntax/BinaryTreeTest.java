@@ -62,7 +62,7 @@ public class BinaryTreeTest {
         expected.add(5);
         expected.add(3);
 
-        List<Integer> actual = binaryTree.getNodesInorder(binaryTree.getRoot())
+        List<Integer> actual = binaryTree.getNodesPreOrder(binaryTree.getRoot())
                 .stream()
                 .map(Node::getKey)
                 .collect(Collectors.toList());
@@ -78,7 +78,7 @@ public class BinaryTreeTest {
         expected.add(4);
         expected.add(5);
 
-        List<Integer> actual = binaryTree.getNodesInorder(binaryTree.getRoot())
+        List<Integer> actual = binaryTree.getNodesBreadthFirst(binaryTree.getRoot())
                 .stream()
                 .map(Node::getKey)
                 .collect(Collectors.toList());
