@@ -8,9 +8,11 @@ import java.util.Queue;
 public class BinaryTree {
     // Root of Binary Tree
     private Node root;
+    private List<Node> list;
 
     public BinaryTree() {
         root = null;
+        list = new ArrayList<>();
     }
 
     public Node getRoot() {
@@ -24,50 +26,32 @@ public class BinaryTree {
     /* Given a binary tree, print its nodes according to the 
       "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
-        List<Node> list = new ArrayList<>();
-        postOrder(list, node);
-        return list;
-    }
-
-    private void postOrder(List list, Node node) {
-        if (node == null) {
-            return;
+        if (node != null) {
+            getNodesPostOrder(node.getLeft());
+            getNodesPostOrder(node.getRight());
+            list.add(node);
         }
-        postOrder(list, node.getLeft());
-        postOrder(list, node.getRight());
-        list.add(node);
+        return list;
     }
 
     /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
-        List<Node> list = new ArrayList<>();
-        inOrder(list, node);
-        return list;
-    }
-
-    private void inOrder(List list, Node node) {
-        if (node == null) {
-            return;
+        if (node != null) {
+            getNodesInorder(node.getLeft());
+            list.add(node);
+            getNodesInorder(node.getRight());
         }
-        inOrder(list, node.getLeft());
-        list.add(node);
-        inOrder(list, node.getRight());
+        return list;
     }
 
     /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
-        List<Node> list = new ArrayList<>();
-        preOrder(list, node);
-        return list;
-    }
-
-    private void preOrder(List list, Node node) {
-        if (node == null) {
-            return;
+        if (node != null) {
+            list.add(node);
+            getNodesPreOrder(node.getLeft());
+            getNodesPreOrder(node.getRight());
         }
-        list.add(node);
-        preOrder(list, node.getLeft());
-        preOrder(list, node.getRight());
+        return list;
     }
 
     /* Given a binary tree, print its nodes in pre order*/
