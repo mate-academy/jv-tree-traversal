@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -25,31 +26,19 @@ public class BinaryTree {
       "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
         Stack<Node> nodes = new Stack<>();
+        nodes.add(node);
         List<Node> result = new ArrayList<>();
-        Node current = node;
-        while (true) {
-            if (current != null) {
-                if (current.getRight() != null) {
-                    nodes.push(current.getRight());
-                }
-                nodes.push(current);
-                current = current.getLeft();
-                continue;
+        while (!nodes.isEmpty()) {
+            Node current = nodes.pop();
+            result.add(current);
+            if (current.getLeft() != null) {
+                nodes.push(current.getLeft());
             }
-            if (nodes.isEmpty()) {
-                break;
-            }
-            current = nodes.pop();
-            if (current.getRight() != null && !nodes.isEmpty()
-                    && current.getRight() == nodes.peek()) {
-                nodes.pop();
-                nodes.push(current);
-                current = current.getRight();
-            } else {
-                result.add(current);
-                current = null;
+            if (current.getRight() != null) {
+                nodes.push(current.getRight());
             }
         }
+        Collections.reverse(result);
         return result;
     }
 
