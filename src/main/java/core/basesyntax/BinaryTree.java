@@ -22,6 +22,11 @@ public class BinaryTree {
         this.root = root;
     }
 
+    public List<Node> getNodesInOrder(Node node){
+        List<Node> result = new ArrayList<>();
+        return new ArrayList<>();
+    }
+
     public List<Node> getNodesPostOrder(Node node) {
         List<List<Node>> rows = new ArrayList<>();
         List<Node> nextRow = new ArrayList<>();
@@ -48,8 +53,6 @@ public class BinaryTree {
         result.add(node);
         int currentNode = 0;
         while (currentNode >= 0) {
-            //System.out.println(result.get(result.size()-1).getKey());
-            System.out.println(currentNode);
             if(result.get(currentNode).getLeft() != null
                     && !result.contains(result.get(currentNode).getLeft())){
                 result.add(result.get(currentNode).getLeft());
