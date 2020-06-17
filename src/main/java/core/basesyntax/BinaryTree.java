@@ -1,11 +1,14 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class BinaryTree {
-    // Root of Binary Tree
-    private Node root;
+    Node root;
 
     public BinaryTree() {
         root = null;
@@ -19,29 +22,69 @@ public class BinaryTree {
         this.root = root;
     }
 
-    /* Given a binary tree, print its nodes according to the 
-      "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
-        System.out.println("Please provide your implementation");
-
-        return new ArrayList<>();
+        List<List<Node>> rows = new ArrayList<>();
+        List<Node> nextRow = new ArrayList<>();
+        nextRow.add(node);
+        rows.add(nextRow);
+        while (nextRow.size() > 0) {
+            nextRow = new ArrayList<>();
+            for (Node value : rows.get(rows.size() - 1)) {
+                if (value.getLeft() != null) {
+                    nextRow.add(value.getLeft());
+                }
+                if (value.getRight() != null) {
+                    nextRow.add(value.getRight());
+                }
+            }
+            rows.add(nextRow);
+        }
+        return IntStream.range(1, rows.size() + 1).mapToObj(i -> rows.get(rows.size() - i))
+                .flatMap(Collection::stream).collect(Collectors.toList());
     }
 
-    /* Given a binary tree, print its nodes in inorder*/
-    public List<Node> getNodesInorder(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
-    }
-
-    /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        List<Node> result = new ArrayList<>();
+        result.add(node);
+        int currentNode = 0;
+        while (currentNode >= 0) {
+            //System.out.println(result.get(result.size()-1).getKey());
+            System.out.println(currentNode);
+            if(result.get(currentNode).getLeft() != null
+                    && !result.contains(result.get(currentNode).getLeft())){
+                result.add(result.get(currentNode).getLeft());
+                currentNode ++;
+                continue;
+            }
+            if(result.get(currentNode).getRight() != null
+                    && !result.contains(result.get(currentNode).getRight())){
+                result.add(result.get(currentNode).getRight());
+                currentNode ++;
+                continue;
+            }
+            currentNode--;
+        }
+        return result;
     }
 
-    /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesBreadthFirst(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
+        List<Node> currentRow = new ArrayList<>();
+        currentRow.add(node);
+        while (currentRow.size() > 0) {
+            List<Node> nextRow = new ArrayList<>();
+            for (Node value : currentRow) {
+                if (value.getLeft() != null) {
+                    nextRow.add(value.getLeft());
+                }
+                if (value.getRight() != null) {
+                    nextRow.add(value.getRight());
+                }
+            }
+            nodes.addAll(currentRow);
+            currentRow.clear();
+            currentRow.addAll(nextRow);
+        }
+        return nodes;
     }
 }

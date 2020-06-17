@@ -46,7 +46,7 @@ public class BinaryTreeTest {
         expected.add(1);
         expected.add(3);
 
-        List<Integer> actual = binaryTree.getNodesInorder(binaryTree.getRoot())
+        List<Integer> actual = binaryTree.root.getNodesInorder(binaryTree.getRoot())
                 .stream()
                 .map(Node::getKey)
                 .collect(Collectors.toList());
