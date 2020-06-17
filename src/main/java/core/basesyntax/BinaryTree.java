@@ -63,8 +63,10 @@ public class BinaryTree {
             }
             rows.add(nextRow);
         }
-        return IntStream.range(1, rows.size() + 1).mapToObj(i -> rows.get(rows.size() - i))
-                .flatMap(Collection::stream).collect(Collectors.toList());
+        return IntStream.range(1, rows.size() + 1)
+                .mapToObj(i -> rows.get(rows.size() - i))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     public List<Node> getNodesPreOrder(Node node) {

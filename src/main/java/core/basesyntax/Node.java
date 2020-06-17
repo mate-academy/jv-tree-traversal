@@ -1,8 +1,5 @@
 package core.basesyntax;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Node {
     private int key;
     private Node left;
