@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import java.net.NetworkInterface;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,9 +23,30 @@ public class BinaryTree {
         this.root = root;
     }
 
-    public List<Node> getNodesInOrder(Node node){
+    public List<Node> getNodesInorder(Node node) {
         List<Node> result = new ArrayList<>();
-        return new ArrayList<>();
+        List<Node> rootNodes = new ArrayList<>();
+        rootNodes.add(node);
+        int currentPosition = 0;
+        while (currentPosition >= 0) {
+            Node currentNode = rootNodes.get(currentPosition);
+            if (currentNode.getLeft() != null && !rootNodes.contains(currentNode.getLeft())){
+                rootNodes.add(currentNode.getLeft());
+                currentPosition ++;
+                continue;
+            }
+            if (!result.contains(currentNode)){
+                result.add(currentNode);
+                continue;
+            }
+            if (currentNode.getRight() != null && !rootNodes.contains(currentNode.getRight())){
+                rootNodes.add(currentNode.getRight());
+                currentPosition = rootNodes.indexOf(currentNode.getRight());
+                continue;
+            }
+            currentPosition --;
+        }
+        return result;
     }
 
     public List<Node> getNodesPostOrder(Node node) {
@@ -74,7 +96,7 @@ public class BinaryTree {
         List<Node> nodes = new ArrayList<>();
         List<Node> currentRow = new ArrayList<>();
         currentRow.add(node);
-        while (currentRow.size() > 0) {
+        while (!currentRow.isEmpty()) {
             List<Node> nextRow = new ArrayList<>();
             for (Node value : currentRow) {
                 if (value.getLeft() != null) {

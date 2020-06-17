@@ -37,14 +37,4 @@ class Node {
         this.right = right;
     }
 
-    public List<Node> getNodesInorder(Node node) {
-        List<Node> result = new ArrayList<>();
-        List<Node> leftNodes = new ArrayList<>();
-        leftNodes.add(node);
-        while (leftNodes.get(leftNodes.size()-1).getLeft() != null){
-            leftNodes.add(leftNodes.get(leftNodes.size()-1).getLeft());
-        }
-
-        return result;
-    }
 }
