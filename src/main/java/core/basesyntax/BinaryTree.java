@@ -1,9 +1,7 @@
 package core.basesyntax;
 
-import java.net.NetworkInterface;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,21 +28,20 @@ public class BinaryTree {
         int currentPosition = 0;
         while (currentPosition >= 0) {
             Node currentNode = rootNodes.get(currentPosition);
-            if (currentNode.getLeft() != null && !rootNodes.contains(currentNode.getLeft())){
+            if (currentNode.getLeft() != null && !rootNodes.contains(currentNode.getLeft())) {
                 rootNodes.add(currentNode.getLeft());
-                currentPosition ++;
+                currentPosition++;
                 continue;
             }
-            if (!result.contains(currentNode)){
+            if (!result.contains(currentNode)) {
                 result.add(currentNode);
-                continue;
             }
-            if (currentNode.getRight() != null && !rootNodes.contains(currentNode.getRight())){
+            if (currentNode.getRight() != null && !rootNodes.contains(currentNode.getRight())) {
                 rootNodes.add(currentNode.getRight());
                 currentPosition = rootNodes.indexOf(currentNode.getRight());
                 continue;
             }
-            currentPosition --;
+            currentPosition--;
         }
         return result;
     }
@@ -54,14 +51,14 @@ public class BinaryTree {
         List<Node> nextRow = new ArrayList<>();
         nextRow.add(node);
         rows.add(nextRow);
-        while (nextRow.size() > 0) {
+        while (!nextRow.isEmpty()) {
             nextRow = new ArrayList<>();
-            for (Node value : rows.get(rows.size() - 1)) {
-                if (value.getLeft() != null) {
-                    nextRow.add(value.getLeft());
+            for (Node currentNode : rows.get(rows.size() - 1)) {
+                if (currentNode.getLeft() != null) {
+                    nextRow.add(currentNode.getLeft());
                 }
-                if (value.getRight() != null) {
-                    nextRow.add(value.getRight());
+                if (currentNode.getRight() != null) {
+                    nextRow.add(currentNode.getRight());
                 }
             }
             rows.add(nextRow);
@@ -73,43 +70,44 @@ public class BinaryTree {
     public List<Node> getNodesPreOrder(Node node) {
         List<Node> result = new ArrayList<>();
         result.add(node);
-        int currentNode = 0;
-        while (currentNode >= 0) {
-            if(result.get(currentNode).getLeft() != null
-                    && !result.contains(result.get(currentNode).getLeft())){
-                result.add(result.get(currentNode).getLeft());
-                currentNode ++;
+        int currentPosition = 0;
+        while (currentPosition >= 0) {
+            Node currentNode = result.get(currentPosition);
+            if (currentNode.getLeft() != null
+                    && !result.contains(currentNode.getLeft())) {
+                result.add(currentNode.getLeft());
+                currentPosition++;
                 continue;
             }
-            if(result.get(currentNode).getRight() != null
-                    && !result.contains(result.get(currentNode).getRight())){
-                result.add(result.get(currentNode).getRight());
-                currentNode ++;
+            if (currentNode.getRight() != null
+                    && !result.contains(currentNode.getRight())) {
+                result.add(currentNode.getRight());
+                currentPosition++;
                 continue;
             }
-            currentNode--;
+            currentPosition--;
         }
         return result;
     }
 
     public List<Node> getNodesBreadthFirst(Node node) {
-        List<Node> nodes = new ArrayList<>();
+        List<Node> result = new ArrayList<>();
         List<Node> currentRow = new ArrayList<>();
         currentRow.add(node);
         while (!currentRow.isEmpty()) {
             List<Node> nextRow = new ArrayList<>();
-            for (Node value : currentRow) {
-                if (value.getLeft() != null) {
-                    nextRow.add(value.getLeft());
+            for (Node currentNode : currentRow) {
+                if (currentNode.getLeft() != null) {
+                    nextRow.add(currentNode.getLeft());
                 }
-                if (value.getRight() != null) {
-                    nextRow.add(value.getRight());
+                if (currentNode.getRight() != null) {
+                    nextRow.add(currentNode.getRight());
                 }
             }
-            nodes.addAll(currentRow);
+            result.addAll(currentRow);
             currentRow.clear();
             currentRow.addAll(nextRow);
         }
-        return nodes;
+        return result;
     }
 }
