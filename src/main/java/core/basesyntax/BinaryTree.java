@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -21,38 +22,33 @@ public class BinaryTree {
     }
 
     public List<Node> getNodesPostOrder(Node node) {
-        List<Node> nodes = new ArrayList<>();
-        if (node.getLeft() != null) {
-            nodes.addAll(getNodesPostOrder(node.getLeft()));
+        if (node == null) {
+            return Collections.emptyList();
         }
-        if (node.getRight() != null) {
-            nodes.addAll(getNodesPostOrder(node.getRight()));
-        }
+        List<Node> nodes = new ArrayList<>(getNodesPostOrder(node.getLeft()));
+        nodes.addAll(getNodesPostOrder(node.getRight()));
         nodes.add(node);
         return nodes;
     }
 
     public List<Node> getNodesInorder(Node node) {
-        List<Node> nodes = new ArrayList<>();
-        if (node.getLeft() != null) {
-            nodes.addAll(getNodesInorder(node.getLeft()));
+        if (node == null) {
+            return Collections.emptyList();
         }
+        List<Node> nodes = new ArrayList<>(getNodesInorder(node.getLeft()));
         nodes.add(node);
-        if (node.getRight() != null) {
-            nodes.addAll(getNodesInorder(node.getRight()));
-        }
+        nodes.addAll(getNodesInorder(node.getRight()));
         return nodes;
     }
 
     public List<Node> getNodesPreOrder(Node node) {
+        if (node == null) {
+            return Collections.emptyList();
+        }
         List<Node> nodes = new ArrayList<>();
         nodes.add(node);
-        if (node.getLeft() != null) {
-            nodes.addAll(getNodesPreOrder(node.getLeft()));
-        }
-        if (node.getRight() != null) {
-            nodes.addAll(getNodesPreOrder(node.getRight()));
-        }
+        nodes.addAll(getNodesPreOrder(node.getLeft()));
+        nodes.addAll(getNodesPreOrder(node.getRight()));
         return nodes;
     }
 
