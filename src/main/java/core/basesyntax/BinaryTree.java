@@ -1,11 +1,13 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BinaryTree {
-    // Root of Binary Tree
     private Node root;
+    private List<Node> list;
 
     public BinaryTree() {
         root = null;
@@ -19,29 +21,76 @@ public class BinaryTree {
         this.root = root;
     }
 
-    /* Given a binary tree, print its nodes according to the 
-      "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
-        System.out.println("Please provide your implementation");
-
-        return new ArrayList<>();
+        list = new ArrayList<>();
+        return recursivePostOrder(node);
     }
 
-    /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        list = new ArrayList<>();
+        return recursiveInorder(node);
     }
 
-    /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        list = new ArrayList<>();
+        return recursivePreOrder(node);
     }
 
-    /* Given a binary tree, print its nodes in pre order*/
-    public List<Node> getNodesBreadthFirst(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+    public List<Node> getNodesBreadthFirst(Node root) {
+        list = new ArrayList<>();
+        if (root == null) {
+            return null;
+        }
+        Queue<Node> q = new LinkedList<Node>();
+        q.add(root);
+        while (true) {
+            int nodeCount = q.size();
+            if (nodeCount == 0) {
+                break;
+            }
+            while (nodeCount > 0) {
+                Node node = q.peek();
+                q.remove();
+                list.add(node);
+                if (node.getLeft() != null) {
+                    q.add(node.getLeft());
+                }
+                if (node.getRight() != null) {
+                    q.add(node.getRight());
+                }
+                nodeCount--;
+            }
+        }
+        return list;
+    }
+
+    private List<Node> recursivePreOrder(Node node) {
+        if (node == null) {
+            return null;
+        }
+        list.add(node);
+        recursivePreOrder(node.getLeft());
+        recursivePreOrder(node.getRight());
+        return list;
+    }
+
+    private List<Node> recursiveInorder(Node node) {
+        if (node == null) {
+            return null;
+        }
+        recursiveInorder(node.getLeft());
+        list.add(node);
+        recursiveInorder(node.getRight());
+        return list;
+    }
+
+    private List<Node> recursivePostOrder(Node node) {
+        if (node == null) {
+            return null;
+        }
+        recursivePostOrder(node.getLeft());
+        recursivePostOrder(node.getRight());
+        list.add(node);
+        return list;
     }
 }
