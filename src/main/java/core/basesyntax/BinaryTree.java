@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -8,8 +9,6 @@ import java.util.Queue;
 public class BinaryTree {
     // Root of Binary Tree
     private Node root;
-
-    private final List<Node> list = new ArrayList<>();
 
     public BinaryTree() {
         root = null;
@@ -27,38 +26,40 @@ public class BinaryTree {
       "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
         if (node == null) {
-            return this.list;
+            return Collections.emptyList();
         }
 
-        getNodesPostOrder(node.getLeft());
-        getNodesPostOrder(node.getRight());
-        this.list.add(node);
-        return this.list;
+        List<Node> nodesList = new ArrayList<>();
+        nodesList.addAll(getNodesPostOrder(node.getLeft()));
+        nodesList.addAll(getNodesPostOrder(node.getRight()));
+        nodesList.add(node);
+        return nodesList;
     }
 
     /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
         if (node == null) {
-            return this.list;
+            return Collections.emptyList();
         }
 
-        getNodesInorder(node.getLeft());
-        this.list.add(node);
-        getNodesInorder(node.getRight());
-        return this.list;
+        List<Node> nodesList = new ArrayList<>();
+        nodesList.addAll(getNodesInorder(node.getLeft()));
+        nodesList.add(node);
+        nodesList.addAll(getNodesInorder(node.getRight()));
+        return nodesList;
     }
 
     /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
         if (node == null) {
-            return this.list;
+            return Collections.emptyList();
         }
 
-        this.list.add(node);
-        getNodesPreOrder(node.getLeft());
-        getNodesPreOrder(node.getRight());
-
-        return this.list;
+        List<Node> nodesList = new ArrayList<>();
+        nodesList.add(node);
+        nodesList.addAll(getNodesPreOrder(node.getLeft()));
+        nodesList.addAll(getNodesPreOrder(node.getRight()));
+        return nodesList;
     }
 
     /* Given a binary tree, print its nodes in pre order*/
