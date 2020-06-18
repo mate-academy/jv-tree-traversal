@@ -94,24 +94,15 @@ public class BinaryTree {
         Queue<Node> nodeQueue = new LinkedList<>();
 
         nodeQueue.add(node);
-        while (true) {
-            int nodeCount = nodeQueue.size();
-            if (nodeCount == 0) {
-                break;
+        while (!nodeQueue.isEmpty()) {
+            Node current = nodeQueue.poll();
+            resultOrder.add(current);
+
+            if (current.getLeft() != null) {
+                nodeQueue.add(current.getLeft());
             }
-
-            while (nodeCount > 0) {
-                Node current = nodeQueue.peek();
-                resultOrder.add(current);
-                nodeQueue.remove();
-
-                if (current.getLeft() != null) {
-                    nodeQueue.add(current.getLeft());
-                }
-                if (current.getRight() != null) {
-                    nodeQueue.add(current.getRight());
-                }
-                nodeCount--;
+            if (current.getRight() != null) {
+                nodeQueue.add(current.getRight());
             }
         }
         return resultOrder;
