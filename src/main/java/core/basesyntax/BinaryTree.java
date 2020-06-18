@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BinaryTree {
-    Node root;
+    private Node root;
 
     public BinaryTree() {
         root = null;
