@@ -95,8 +95,7 @@ public class BinaryTree {
     private int getHeight(Node root) {
         if (root == null) {
             return 0;
-        } else {
-            return Math.max(getHeight(root.getLeft()), getHeight(root.getRight())) + 1;
         }
+        return Math.max(getHeight(root.getLeft()), getHeight(root.getRight())) + 1;
     }
 }
