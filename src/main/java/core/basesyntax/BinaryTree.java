@@ -8,11 +8,9 @@ import java.util.Queue;
 public class BinaryTree {
     // Root of Binary Tree
     private Node root;
-    private List<Node> nodes;
 
     public BinaryTree() {
         root = null;
-        nodes = new ArrayList<>();
     }
 
     public Node getRoot() {
@@ -27,31 +25,37 @@ public class BinaryTree {
       "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
         if (node != null) {
-            getNodesPostOrder(node.getLeft());
-            getNodesPostOrder(node.getRight());
+            List<Node> nodes = new ArrayList<>();
+            nodes.addAll(getNodesPostOrder(node.getLeft()));
+            nodes.addAll(getNodesPostOrder(node.getRight()));
             nodes.add(node);
+            return nodes;
         }
-        return nodes;
+        return new ArrayList<>();
     }
 
     /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
+        List<Node> nodes = new ArrayList<>();
         if (node != null) {
-            getNodesInorder(node.getLeft());
+            nodes.addAll(getNodesInorder(node.getLeft()));
             nodes.add(node);
-            getNodesInorder(node.getRight());
+            nodes.addAll(getNodesInorder(node.getRight()));
+            return nodes;
         }
-        return nodes;
+        return new ArrayList<>();
     }
 
     /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
+        List<Node> nodes = new ArrayList<>();
         if (node != null) {
             nodes.add(node);
-            getNodesPreOrder(node.getLeft());
-            getNodesPreOrder(node.getRight());
+            nodes.addAll(getNodesPreOrder(node.getLeft()));
+            nodes.addAll(getNodesPreOrder(node.getRight()));
+            return nodes;
         }
-        return nodes;
+        return new ArrayList<>();
     }
 
     /* Given a binary tree, print its nodes in pre order*/
@@ -60,7 +64,7 @@ public class BinaryTree {
         List<Node> list = new ArrayList<>();
 
         queue.add(node);
-        while (queue.size() > 0) {
+        while (!queue.isEmpty()) {
             Node temp = queue.poll();
             list.add(temp);
             if (temp.getLeft() != null) {
