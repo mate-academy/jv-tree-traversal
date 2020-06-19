@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class BinaryTree {
-    // Root of Binary Tree
     private Node root;
 
     public BinaryTree() {
@@ -25,7 +25,7 @@ public class BinaryTree {
       "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
         if (node == null) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
 
         List<Node> nodes = new ArrayList<>();
@@ -38,7 +38,7 @@ public class BinaryTree {
     /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
         if (node == null) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
 
         List<Node> nodes = new ArrayList<>();
@@ -51,7 +51,7 @@ public class BinaryTree {
     /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
         if (node == null) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
 
         List<Node> nodes = new ArrayList<>();
