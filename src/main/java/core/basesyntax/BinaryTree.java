@@ -6,6 +6,9 @@ import java.util.List;
 public class BinaryTree {
 
     private Node root;
+    private List<Node> inOrder = new ArrayList<>();
+    private List<Node> postOrder = new ArrayList<>();
+    private List<Node> preOrder = new ArrayList<>();
 
     public BinaryTree() {
         root = null;
@@ -20,59 +23,40 @@ public class BinaryTree {
     }
 
     public List<Node> getNodesPostOrder(Node node) {
-        List<Node> postOrder = new ArrayList<>();
-        postOrder(node, postOrder);
+        if (node == null) {
+            return postOrder;
+        }
+        getNodesPostOrder(node.getLeft());
+        getNodesPostOrder(node.getRight());
+        postOrder.add(node);
         return postOrder;
     }
 
-    private void postOrder(Node node, List<Node> postOrder) {
-        if (node == null) {
-            return;
-        }
-        postOrder(node.getLeft(), postOrder);
-        postOrder(node.getRight(), postOrder);
-        postOrder.add(node);
-    }
-
     public List<Node> getNodesInorder(Node node) {
-        List<Node> inOrder = new ArrayList<>();
-        inOrder(node, inOrder);
+        if (node == null) {
+            return inOrder;
+        }
+        getNodesInorder(node.getLeft());
+        inOrder.add(node);
+        getNodesInorder(node.getRight());
         return inOrder;
     }
 
     public List<Node> getNodesPreOrder(Node node) {
-        List<Node> preOrder = new ArrayList<>();
-        preOrder(node, preOrder);
+        if (node == null) {
+            return preOrder;
+        }
+        preOrder.add(node);
+        getNodesPreOrder(node.getLeft());
+        getNodesPreOrder(node.getRight());
         return preOrder;
     }
 
     public List<Node> getNodesBreadthFirst(Node node) {
-        return getListForNodesBreadFirst(node);
-    }
-
-    private void inOrder(Node node, List<Node> inOrder) {
-        if (node == null) {
-            return;
-        }
-        inOrder(node.getLeft(), inOrder);
-        inOrder.add(node);
-        inOrder(node.getRight(), inOrder);
-    }
-
-    private void preOrder(Node node, List<Node> preOrder) {
-        if (node == null) {
-            return;
-        }
-        preOrder.add(node);
-        preOrder(node.getLeft(), preOrder);
-        preOrder(node.getRight(), preOrder);
-    }
-
-    private List<Node> getListForNodesBreadFirst(Node node) {
         List<Node> queue = new ArrayList<>();
         List<Node> result = new ArrayList<>();
         queue.add(node);
-        while (queue.size() > 0) {
+        while (!queue.isEmpty()) {
             Node tempNode = queue.get(0);
             queue.remove(0);
             result.add(tempNode);
