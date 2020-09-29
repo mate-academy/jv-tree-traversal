@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class BinaryTree {
     // Root of Binary Tree
@@ -63,12 +63,21 @@ public class BinaryTree {
 
     /* Given a binary tree, print its nodes in breadth order*/
     public List<Node> getNodesBreadthFirst(Node node) {
-        return getNodesPreOrder(node).stream()
-                .collect(Collectors.groupingBy(Node::getKey))
-                .entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .map(Map.Entry::getValue)
-                .map(value -> value.get(0))
-                .collect(Collectors.toList());
+        List<Node> result = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        result.add(node);
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
+            if (currentNode.getLeft() != null) {
+                result.add(currentNode.getLeft());
+                queue.add(currentNode.getLeft());
+            }
+            if (currentNode.getRight() != null) {
+                result.add(currentNode.getRight());
+                queue.add(currentNode.getRight());
+            }
+        }
+        return result;
     }
 }
