@@ -1,9 +1,9 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.LinkedList;
 
 public class BinaryTree {
     // Root of Binary Tree
