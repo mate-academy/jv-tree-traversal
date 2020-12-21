@@ -1,10 +1,12 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTree {
-    // Root of Binary Tree
     private Node root;
 
     public BinaryTree() {
@@ -19,29 +21,61 @@ public class BinaryTree {
         this.root = root;
     }
 
-    /* Given a binary tree, print its nodes according to the 
-      "bottom-up" post order traversal. */
     public List<Node> getNodesPostOrder(Node node) {
-        System.out.println("Please provide your implementation");
-
-        return new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
+        if (node.getLeft() != null) {
+            nodes.addAll(getNodesPostOrder(node.getLeft()));
+        }
+        if (node.getRight() != null) {
+            nodes.addAll(getNodesPostOrder(node.getRight()));
+        }
+        nodes.add(node);
+        return nodes;
     }
 
-    /* Given a binary tree, print its nodes in inorder*/
     public List<Node> getNodesInorder(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
+        if (node.getLeft() != null) {
+            nodes.addAll(getNodesInorder(node.getLeft()));
+        }
+        nodes.add(node);
+        if (node.getRight() != null) {
+            nodes.addAll(getNodesInorder(node.getRight()));
+        }
+        return nodes;
     }
 
-    /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesPreOrder(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        List<Node> result = new ArrayList<>();
+        Stack<Node> stackForNodes = new Stack<>();
+        stackForNodes.push(node);
+        while (!stackForNodes.isEmpty()) {
+            Node newNode = stackForNodes.pop();
+            result.add(newNode);
+            if (newNode.getRight() != null) {
+                stackForNodes.push(newNode.getRight());
+            }
+            if (newNode.getLeft() != null) {
+                stackForNodes.push(newNode.getLeft());
+            }
+        }
+        return result;
     }
 
-    /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesBreadthFirst(Node node) {
-        System.out.println("Please provide your implementation");
-        return new ArrayList<>();
+        List<Node> result = new ArrayList<>();
+        Queue<Node> queueForNodes = new LinkedList<>();
+        queueForNodes.add(node);
+        while (!queueForNodes.isEmpty()) {
+            Node newNode = queueForNodes.remove();
+            result.add(newNode);
+            if (newNode.getLeft() != null) {
+                queueForNodes.add(newNode.getLeft());
+            }
+            if (newNode.getRight() != null) {
+                queueForNodes.add(newNode.getRight());
+            }
+        }
+        return result;
     }
 }
