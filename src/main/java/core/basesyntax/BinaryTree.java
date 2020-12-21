@@ -1,7 +1,9 @@
 package core.basesyntax;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BinaryTree {
     // Root of Binary Tree
@@ -58,24 +60,18 @@ public class BinaryTree {
 
     /* Given a binary tree, print its nodes in pre order*/
     public List<Node> getNodesBreadthFirst(Node node) {
-        if (node == null) {
-            return new ArrayList<>();
-        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
         List<Node> list = new ArrayList<>();
-        if (node == root) {
-            list.add(node);
-        }
-        if (node.getLeft() != null) {
-            list.add(node.getLeft());
-        }
-        if (node.getRight() != null) {
-            list.add(node.getRight());
-        }
-        if (node.getLeft() != null) {
-            list.addAll(getNodesBreadthFirst(node.getLeft()));
-        }
-        if (node.getRight() != null) {
-            list.addAll(getNodesBreadthFirst(node.getRight()));
+        while (!queue.isEmpty()) {
+            Node localNode = queue.poll();
+            list.add(localNode);
+            if (localNode.getLeft() != null) {
+                queue.add(localNode.getLeft());
+            }
+            if (localNode.getRight() != null) {
+                queue.add(localNode.getRight());
+            }
         }
         return list;
     }
