@@ -46,20 +46,15 @@ public class BinaryTree {
     }
 
     public List<Node> getNodesPreOrder(Node node) {
-        List<Node> result = new ArrayList<>();
-        Stack<Node> stackForNodes = new Stack<>();
-        stackForNodes.push(node);
-        while (!stackForNodes.isEmpty()) {
-            Node newNode = stackForNodes.pop();
-            result.add(newNode);
-            if (newNode.getRight() != null) {
-                stackForNodes.push(newNode.getRight());
-            }
-            if (newNode.getLeft() != null) {
-                stackForNodes.push(newNode.getLeft());
-            }
+        List<Node> nodes = new ArrayList<>();
+        nodes.add(node);
+        if (node.getLeft() != null) {
+            nodes.addAll(getNodesPostOrder(node.getLeft()));
         }
-        return result;
+        if (node.getRight() != null) {
+            nodes.addAll(getNodesPreOrder(node.getRight()));
+        }
+        return nodes;
     }
 
     public List<Node> getNodesBreadthFirst(Node node) {
