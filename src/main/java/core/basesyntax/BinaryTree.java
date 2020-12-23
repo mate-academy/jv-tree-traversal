@@ -48,7 +48,7 @@ public class BinaryTree {
         List<Node> nodes = new ArrayList<>();
         nodes.add(node);
         if (node.getLeft() != null) {
-            nodes.addAll(getNodesPostOrder(node.getLeft()));
+            nodes.addAll(getNodesPreOrder(node.getLeft()));
         }
         if (node.getRight() != null) {
             nodes.addAll(getNodesPreOrder(node.getRight()));
